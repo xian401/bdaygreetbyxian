@@ -1,0 +1,1 @@
+- [x] Update the background URL in index.html to use a random cat image from cataas.com

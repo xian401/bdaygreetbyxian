@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Birthday</title>
+<style>
+body {
+    margin: 0;
+    background-image: url('gaga.jpg');
+    background-size: cover;
+    font-family: Helvetica, sans-serif;
+    color: rgb(231, 21, 140);
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+}
+
+.left {
+    width: 45%;
+    padding-top: 60px;
+}
+
+.left h1 {
+    font-size: 48px;
+}
+
+.left p {
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+button {
+    background: #222;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 10px;
+    border: 1px solid #555;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ---------- CAKE ---------- */
+.cake-area {
+  width: 480px;
+  height: 480px;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Basic Cake */
+.cake {
+    position: relative;
+    width: 260px;
+    height: 200px;
+    background: linear-gradient(to bottom, #8b4513, #654321);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    animation: cakeBounce 2s ease-in-out;
+}
+
+/* Cake Bounce Animation */
+@keyframes cakeBounce {
+    0% { transform: scale(0.9); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Cake Layers */
+.layer {
+    position: absolute;
+    width: 240px;
+    height: 50px;
+    background: linear-gradient(to bottom, #f8ac08, #e6a00a);
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    bottom: 0;
+    left: 10px;
+    background-image: radial-gradient(circle at 20% 20%, rgba(0,0,0,0.1) 1px, transparent 1px), radial-gradient(circle at 80% 80%, rgba(0,0,0,0.1) 1px, transparent 1px);
+    background-size: 10px 10px;
+}
+
+.layer-2 {
+    background: linear-gradient(to bottom, #d3d3d3, #b8b8b8);
+    bottom: 60px;
+    width: 220px;
+    left: 20px;
+    background-image: radial-gradient(circle at 30% 30%, rgba(0,0,0,0.1) 1px, transparent 1px), radial-gradient(circle at 70% 70%, rgba(0,0,0,0.1) 1px, transparent 1px);
+    background-size: 10px 10px;
+}
+
+.layer-3 {
+    background: linear-gradient(to bottom, #ff69b4, #e91e63);
+    bottom: 120px;
+    width: 200px;
+    left: 30px;
+    background-image: radial-gradient(circle at 40% 40%, rgba(0,0,0,0.1) 1px, transparent 1px), radial-gradient(circle at 60% 60%, rgba(0,0,0,0.1) 1px, transparent 1px);
+    background-size: 10px 10px;
+}
+
+/* Cake Icing */
+.cake:before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 0px;
+    right: 0px;
+    height: 30px;
+    background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+    border-radius: 10px;
+    box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.1), 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-image:
+        radial-gradient(circle at 20% 20%, #ff69b4 2px, transparent 2px),
+        radial-gradient(circle at 50% 30%, #00ff00 2px, transparent 2px),
+        radial-gradient(circle at 80% 40%, #ff4500 2px, transparent 2px),
+        radial-gradient(circle at 30% 60%, #ffff00 2px, transparent 2px),
+        radial-gradient(circle at 70% 70%, #8a2be2 2px, transparent 2px),
+        radial-gradient(circle at 10% 80%, #ff1493 2px, transparent 2px),
+        radial-gradient(circle at 90% 90%, #00ced1 2px, transparent 2px);
+    background-size: 20px 20px;
+}
+
+/* Candles */
+.candle {
+    width: 12px;
+    height: 50px;
+    background: repeating-linear-gradient(#c15656, #fff 6px, #ff85ae 6px, #ff85ae 12px);
+    position: absolute;
+    top: -65px;
+    border-radius: 4px;
+}
+
+/* Candle flame */
+.flame {
+    width: 12px;
+    height: 18px;
+    background: radial-gradient(circle, #ff0, #ff8a00);
+    border-radius: 50%;
+    position: absolute;
+    top: -20px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    animation: flicker 0.15s infinite alternate;
+}
+
+/* Hide Flame */
+.flame.hidden {
+    display: none;
+}
+
+/* Flicker Animation */
+@keyframes flicker {
+    0% { transform: scale(1) translateY(0); opacity: .9; }
+    100% { transform: scale(1.2) translateY(-2px); opacity: 1; }
+}
+
+/* CONFETTI */
+.confetti {
+    position: fixed;
+    top: -10px;
+    width: 10px;
+    height: 20px;
+    background: red;
+    opacity: 0.9;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotateZ(360deg);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+<body>
+
+<audio id="birthdayAudio" loop>
+    <source src="haha.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+    <!-- LEFT -->
+    <div class="left">
+        <h1>Happy 19th Birthday, Nikka Angela Lu🐱🎉</h1>
+        <p>Wish ko na ma-achieve mo lahat ng dreams mo, makapasa sa lahat ng exams, at maging isang engineer na hindi lang magaling, kundi may puso.
+Enjoy your day, future Engineer! 🐱🎂✨</p>
+
+        <button onclick="playAudio()">Play Music</button>
+        <button onclick="enableMic()">Open Mic</button>
+        <button onclick="relight()">Light Candles</button>
+    </div>
+
+    <!-- RIGHT (CAKE) -->
+    <div class="cake-area">
+        <div class="cake">
+            <div class="layer layer-2"></div>
+            <div class="layer layer-3"></div>
+            <div class="candle" style="left: 60px;"><div class="flame"></div></div>
+            <div class="candle" style="left: 120px;"><div class="flame"></div></div>
+            <div class="candle" style="left: 180px;"><div class="flame"></div></div>
+        </div>
+    </div>
+</div>
+
+<script>
+let micStream;
+let audioContext;
+let analyser;
+
+function enableMic() {
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+        micStream = stream;
+        audioContext = new AudioContext();
+        const source = audioContext.createMediaStreamSource(stream);
+        analyser = audioContext.createAnalyser();
+        analyser.fftSize = 512;
+        source.connect(analyser);
+        checkMic();
+    });
+}
+
+function checkMic() {
+    const data = new Uint8Array(analyser.frequencyBinCount);
+
+    function detectBlow() {
+        analyser.getByteFrequencyData(data);
+        let volume = data.reduce((a, b) => a + b) / data.length;
+
+        if (volume > 45) {
+            blowOut();
+        }
+        requestAnimationFrame(detectBlow);
+    }
+    detectBlow();
+}
+
+function blowOut() {
+    document.querySelectorAll('.flame').forEach(f => f.classList.add("hidden"));
+    launchConfetti();
+}
+
+function relight() {
+    document.querySelectorAll('.flame').forEach(f => f.classList.remove("hidden"));
+}
+
+function playAudio() {
+    const audio = document.getElementById('birthdayAudio');
+    audio.play().catch(e => console.error('Audio play failed:', e));
+}
+
+function showCake() {
+    document.getElementById('birthday-content').classList.remove('hidden');
+    document.getElementById('cake-area').classList.remove('hidden');
+}
+
+/* CONFETTI GENERATOR */
+function launchConfetti() {
+    for (let i = 0; i < 120; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.backgroundColor =
+          "hsl(" + Math.random() * 360 + ", 90%, 60%)";
+
+        confetti.style.animationDuration = 1 + Math.random() * 2 + "s";
+        confetti.style.transform = "rotate(" + Math.random() * 360 + "deg)";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 3000);
+    }
+}
+</script>
+
+</body>
+</html>
